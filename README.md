@@ -117,7 +117,19 @@ Go to `http://127.0.0.1:5000/` in your browser.
 - All detections are visualized using `OpenCV.plot()` and saved.
 
 ---
+## Additional Information
+Below is the weed.yaml file structure that you can add in your processed_dataset folder after preprocessing the data:
+```bash
+path: 
+C:/Users/91843/Desktop/Projects/Weed_Detection_Project/Weed_Detection_Project/Weed_Detection_Project/processed_dataset  #Path to your processed_dataset file
+train: images/train
+val: images/val
 
+names:
+  0: crop
+  1: weed
+```
+---
 ## 🤝 Credits
 
 - **Ultralytics YOLOv10**: For providing a lightweight yet powerful object detector.
