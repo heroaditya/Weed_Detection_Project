@@ -1,0 +1,97 @@
+<!-- File: templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weed Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Weed Detector Logo">
+            <h1>Smart Weed Detection</h1>
+        </div>
+    </header>
+
+    <main>
+        <section id="upload-section" class="upload-section">
+            <h2>Upload Image or Video for Weed Detection</h2>
+            <form action="/predict" method="POST" enctype="multipart/form-data">
+                <input type="file" name="media" accept="image/*,video/*" required>
+                <button type="submit">Detect from Upload</button>
+            </form>
+        </section>
+
+        <section id="camera-section" class="camera-section">
+            <h2>Or Use Your Camera</h2>
+            <button id="start-camera">Start Camera</button>
+            <video id="video" width="400" autoplay muted></video>
+            <canvas id="canvas" style="display: none;"></canvas>
+            <button id="capture">Capture</button>
+            <form id="camera-form" action="/predict_camera" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="image_data" id="image_data">
+                <button type="submit">Detect from Camera</button>
+            </form>
+        </section>
+
+        {% if uploaded_media %}
+        <section id="results" class="results">
+            <div class="media-results">
+                <div class="media">
+                    <h2>Uploaded Media</h2>
+                    {% if uploaded_media.endswith('.mp4') %}
+                    <video src="{{ url_for('static', filename='uploads/' + uploaded_media) }}" width="100%" controls></video>
+                    {% else %}
+                    <img src="{{ url_for('static', filename='uploads/' + uploaded_media) }}" width="100%">
+                    {% endif %}
+                </div>
+                <div class="media">
+                    <h2>Detection Result</h2>
+                    <img src="{{ url_for('static', filename='results/' + result_media) }}" width="100%">
+                </div>
+            </div>
+            <button id="go-back">Go Back</button>
+        </section>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Weed Detection AI | Powered by YOLOv10</p>
+    </footer>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const imageDataInput = document.getElementById('image_data');
+
+        document.getElementById('start-camera').addEventListener('click', async () => {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+        });
+
+        document.getElementById('capture').addEventListener('click', () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            const imageData = canvas.toDataURL('image/jpeg');
+            imageDataInput.value = imageData;
+        });
+
+        // Auto-hide upload section and show results
+        {% if uploaded_media %}
+        document.getElementById('upload-section').style.display = 'none';
+        document.getElementById('camera-section').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        {% endif %}
+
+        const goBackBtn = document.getElementById('go-back');
+        if (goBackBtn) {
+            goBackBtn.addEventListener('click', () => {
+                window.location.href = "/";
+            });
+        }
+    </script>
+</body>
+</html>

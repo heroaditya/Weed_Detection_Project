@@ -1,0 +1,7 @@
+path: C:/Users/91843/Desktop/Projects/Weed_Detection_Project/Weed_Detection_Project/Weed_Detection_Project/processed_dataset
+train: images/train
+val: images/val
+
+names:
+  0: crop
+  1: weed
