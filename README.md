@@ -77,19 +77,16 @@ This project integrates a deep learning object detection model with a web-based 
 
 ---
 
-## 🖼️ Example Interface & Output
-
-### 🔼 Upload Interface
-_Add image here showing file upload_
-
-### 📷 Camera Detection
-_Add image showing live video + capture_
+## 🖼️ Visualization Results on test data
 
 ### 🧠 Detection Results
 ![confusion_matrix_normalized](https://github.com/user-attachments/assets/b5d4f88d-52fc-44be-bf4a-1729ffe4c4ac)
 ![PR_curve](https://github.com/user-attachments/assets/30d31afc-f96e-4386-a342-a07ad5d8a1e6)
-
+![P_curve](https://github.com/user-attachments/assets/5fa2e488-d0b3-4539-83bd-cf9cf2981f82)
 ![F1_curve](https://github.com/user-attachments/assets/a1825e56-1197-4442-a329-ab57e7ebffae)
+![R_curve](https://github.com/user-attachments/assets/3a7dba54-354e-4f18-a7c5-529f91342c72)
+![val_batch0_labels](https://github.com/user-attachments/assets/440a15ec-56d1-4962-adf9-eb90b41c7aa0)
+![val_batch2_pred](https://github.com/user-attachments/assets/5925a5ea-412f-4aa0-9b39-b5722b719662)
 
 ---
 
